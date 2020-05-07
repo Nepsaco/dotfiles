@@ -1,47 +1,31 @@
 " Plugins
-let iCanHazNeoBundle=1
-let neobundle_readme=expand($HOME.'/.vim/bundle/neobundle.vim/README.md')
-if !filereadable(neobundle_readme)
-    echo "Installing NeoBundle.."
-    echo ""
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
-    let iCanHazNeoBundle=0
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-if has('vim_starting')
-    set rtp+=$HOME/.vim/bundle/neobundle.vim/
-endif
-call neobundle#begin(expand($HOME.'/.vim/bundle/'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-NeoBundle 'posva/vim-vue'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'maxmellon/vim-jsx-pretty'
-
-call neobundle#end()
-
-if iCanHazNeoBundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :NeoBundleInstall
-endif
-NeoBundleCheck
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-commentary'
+Plug 'osyo-manga/vim-over'
+Plug 'thinca/vim-qfreplace'
+Plug 'kshenoy/vim-signature'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+Plug 'posva/vim-vue'
+Plug 'mileszs/ack.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'jiangmiao/auto-pairs'
+Plug 'maxmellon/vim-jsx-pretty'
+call plug#end()
 
 " General config
 inoremap jj <ESC>
@@ -97,7 +81,7 @@ let g:airline_powerline_fonts = 1
 
 " Status line
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Colors

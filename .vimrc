@@ -28,12 +28,9 @@ NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-NeoBundle 'reedes/vim-pencil'
-NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'posva/vim-vue'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'vim-syntastic/syntastic'
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'maxmellon/vim-jsx-pretty'
 
@@ -88,23 +85,10 @@ set diffopt+=iwhite
 set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
-" set mouse=v
-" set clipboard=unnamed
 vmap <C-c> "+y
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" Pencil
-let g:pencil#wrapModeDefault = 'soft'
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd,md call pencil#init()
-    autocmd FileType text call pencil#init({'wrap': 'hard'})
-augroup END
-
-" Goyo
-let g:goyo_width=60
 
 " Airline
 let g:airline_theme='molokai'
@@ -159,9 +143,6 @@ nnoremap <Leader>gg :Gcommit -v -q %:p<CR> " Commits current file
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gm :Git merge<CR>
 
-" Goyo
-nnoremap <Leader>m :Goyo<CR>
-
 " Buffer management
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 nnoremap <Leader>d :bd<CR> " Delete current buffer
@@ -179,12 +160,6 @@ nnoremap <C-H> <C-W><C-H>
 " Newline Generation
 nmap <C-o> O<Esc>
 nmap <CR> o<Esc>
-
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " Auto Pairs
 let g:AutoPairsFlyMode = 0

@@ -1,35 +1,33 @@
 " Plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kshenoy/vim-signature'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mileszs/ack.vim'
+Plug 'osyo-manga/vim-over'
+Plug 'posva/vim-vue'
+Plug 'thinca/vim-qfreplace'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-commentary'
-Plug 'osyo-manga/vim-over'
-Plug 'thinca/vim-qfreplace'
-Plug 'kshenoy/vim-signature'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-Plug 'posva/vim-vue'
-Plug 'mileszs/ack.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'maxmellon/vim-jsx-pretty'
 call plug#end()
 
 " General config
-inoremap jj <ESC>
-inoremap jk <ESC>
 syntax enable
 command E Ex " Disambiguates E
 filetype plugin on
@@ -41,11 +39,6 @@ set nowrap
 set ignorecase smartcase
 set t_Co=256
 set number
-set tabstop=4
-set expandtab
-set autoindent smartindent
-set softtabstop=4
-set shiftwidth=4
 set nobackup
 set noswapfile
 set noerrorbells
@@ -69,20 +62,43 @@ set diffopt+=iwhite
 set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
+
+" Tab setting
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set autoindent smartindent
+
+" Custom key commands
+let mapleader=" "
+inoremap jj <ESC>
+inoremap jk <ESC>
 vmap <C-c> "+y
 
-" vim.ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" Buffer management
+nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
+nnoremap <Leader>d :bd<CR> " Delete current buffer
+nnoremap <Leader>D :bD<CR> " Delete current buffer without saving
+nnoremap <Leader>n :bn<CR> " Next buffer
+nnoremap <Leader>N :bN<CR> " Previous buffer
+nnoremap <Leader>t :enew<CR> " Make a new empty buffer
+nnoremap <Tab> :b#<CR> " Tab between buffers
 
-" Airline
-let g:airline_theme='molokai'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-" Status line
-set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Newline Generation
+nmap <C-o> O<Esc>
+nmap <CR> o<Esc>
+
+" .vimrc editing
+noremap <leader>v :edit $MYVIMRC<CR>
+
+"Plugin Settings
 
 " Colors
 colorscheme solarized
@@ -101,8 +117,24 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
-" Custom key commands
-let mapleader=" "
+" " ALE
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = {'javascript': ['eslint']}
+" let g:ale_lint_on_save = 1
+" let g:ale_fixers = ['eslint', 'prettier']
+" let g:ale_fix_on_save = 1
+" let g:ale_sign_column_always = 0
+" highlight ALEErrorSign ctermbg=NONE ctermfg=red
+" highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+" let g:airline#extensions#ale#enabled = 1
+" autocmd BufWritePost *.js ALEFix
+
+" Auto Pairs
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" vim.ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Find and replace
 function! VisualFindAndReplace()
@@ -127,24 +159,8 @@ nnoremap <Leader>gg :Gcommit -v -q %:p<CR> " Commits current file
 nnoremap <Leader>gp :Git push<CR>
 nnoremap <Leader>gm :Git merge<CR>
 
-" Buffer management
-nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
-nnoremap <Leader>d :bd<CR> " Delete current buffer
-nnoremap <Leader>n :bn<CR> " Next buffer
-nnoremap <Leader>N :bN<CR> " Previous buffer
-nnoremap <Leader>t :enew<CR> " Make a new empty buffer
-nnoremap <Tab> :b#<CR> " Tab between buffers
-
-" Split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Newline Generation
-nmap <C-o> O<Esc>
-nmap <CR> o<Esc>
-
-" Auto Pairs
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<M-b>'
+" Airline
+let g:airline_theme='molokai'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1

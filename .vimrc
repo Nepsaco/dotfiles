@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kshenoy/vim-signature'
@@ -31,10 +31,8 @@ call plug#end()
 syntax enable
 command E Ex " Disambiguates E
 filetype plugin on
-filetype indent on
 set encoding=utf-8
 set laststatus=2
-set nocompatible
 set nowrap
 set ignorecase smartcase
 set t_Co=256
@@ -68,13 +66,14 @@ set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 set expandtab
-set autoindent smartindent
+set autoindent 
+filetype plugin indent on
 
 " Custom key commands
 let mapleader=" "
 inoremap jj <ESC>
 inoremap jk <ESC>
-vmap <C-c> "+y
+vnoremap <C-c> "+y
 
 " Buffer management
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
@@ -92,11 +91,12 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Newline Generation
-nmap <C-o> O<Esc>
-nmap <CR> o<Esc>
+noremap <C-o> O<Esc>
+noremap <CR> o<Esc>
 
 " .vimrc editing
-noremap <leader>v :edit $MYVIMRC<CR>
+noremap <leader>vimrc :edit $MYVIMRC<CR>
+autocmd! BufWritePost ~/.vimrc source $MYVIMRC | PlugStatus 
 
 "Plugin Settings
 

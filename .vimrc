@@ -10,7 +10,6 @@ if has('nvim')
 else
     call plug#begin('~/.vim/plugged')
 endif
-" call plug#begin(stdpath('config') . '/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -122,16 +121,17 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
-" " ALE
+" ALE
 "let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '-'
+highlight SignColumn term=bold cterm=NONE ctermbg=NONE gui=NONE guibg=NONE
+highlight ALEErrorSign ctermfg=Red guifg=Red
+highlight ALEWarningSign ctermfg=Red guifg=Red
 let g:airline#extensions#ale#enabled = 1
 autocmd BufWritePost *.js ALEFix
 

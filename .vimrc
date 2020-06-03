@@ -10,6 +10,7 @@ if has('nvim')
 else
     call plug#begin('~/.vim/plugged')
 endif
+
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -17,10 +18,11 @@ Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kshenoy/vim-signature'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'mileszs/ack.vim'
 Plug 'osyo-manga/vim-over'
-Plug 'posva/vim-vue'
+Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'thinca/vim-qfreplace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -29,11 +31,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
 " General config
 syntax enable
 command E Ex " Disambiguates E
+set nocompatible
 filetype plugin on
 set encoding=utf-8
 set laststatus=2
@@ -95,7 +99,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Newline Generation
-noremap <C-o> O<Esc>
 noremap <CR> o<Esc>
 
 " .vimrc editing
@@ -138,6 +141,11 @@ autocmd BufWritePost *.js ALEFix
 " Auto Pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'

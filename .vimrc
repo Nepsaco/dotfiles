@@ -19,6 +19,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kshenoy/vim-signature'
 Plug 'mileszs/ack.vim'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'osyo-manga/vim-over'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -35,9 +37,9 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " General config
-syntax enable
-command E Ex " Disambiguates E
 set nocompatible
+syntax on
+command E Ex " Disambiguates E
 filetype plugin on
 set encoding=utf-8
 set laststatus=2
@@ -68,19 +70,26 @@ set diffopt+=iwhite
 set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
+set redrawtime=10000
 
 " Tab setting
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
 set expandtab
-set autoindent 
-filetype plugin indent on
+set autoindent
+autocmd FileType php setlocal autoindent
+
+" Search Highlighting
+augroup vimrc-incsearch-highlight
+    autocmd!
+    autocmd CmdlineEnter /,\? :set hlsearch
+    autocmd CmdlineLeave /,\? :set nohlsearch
+augroup END
 
 " Custom key commands
 let mapleader=" "
 inoremap jj <ESC>
-inoremap jk <ESC>
 vnoremap <C-c> "+y
 
 " Buffer management
@@ -90,7 +99,7 @@ nnoremap <Leader>D :bd!<CR> " Delete current buffer without saving
 nnoremap <Leader>n :bn<CR> " Next buffer
 nnoremap <Leader>N :bN<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
-nnoremap <Tab> :b#<CR> " Tab between buffers
+nnoremap <Leader><Tab> :b#<CR> " Tab between buffers
 
 " Split navigation
 nnoremap <C-J> <C-W><C-J>
@@ -103,7 +112,6 @@ noremap <CR> o<Esc>
 
 " .vimrc editing
 noremap <leader>vimrc :edit ~/.vimrc<CR>
-autocmd! BufWritePost ~/.vimrc source $MYVIMRC | PlugStatus 
 
 "Plugin Settings
 
@@ -124,11 +132,11 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
-" ALE
-"let g:ale_linters = {'javascript': ['eslint']}
+"" ALE
+let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'vue': ['eslint'], '*':['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_linters = {}
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
-let g:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '-'
@@ -137,6 +145,7 @@ highlight ALEErrorSign ctermfg=Red guifg=Red
 highlight ALEWarningSign ctermfg=Red guifg=Red
 let g:airline#extensions#ale#enabled = 1
 autocmd BufWritePost *.js ALEFix
+autocmd BufWritePost *.rb ALEFix
 
 " Auto Pairs
 let g:AutoPairsFlyMode = 0
@@ -146,6 +155,10 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+call deoplete#custom#var('tabnine', {
+  \ 'line_limit': 500,
+  \ 'max_num_results': 5
+  \ })
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -165,7 +178,7 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 " Fugitive
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gs :Gstatus<CR> " Views status, use `-` and `p` to add/remove files
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gd :Gvdiffsplit!<CR>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
 nnoremap <Leader>gc :Gcommit -v -q<CR>

@@ -38,14 +38,10 @@ call plug#end()
 
 " General config
 set nocompatible
-syntax on
-command E Ex " Disambiguates E
-filetype plugin on
 set encoding=utf-8
 set laststatus=2
 set nowrap
 set ignorecase smartcase
-set t_Co=256
 set number
 set nobackup
 set noswapfile
@@ -70,11 +66,16 @@ set diffopt+=iwhite
 set listchars=trail:·,nbsp:⚋
 set fillchars=fold:-
 set updatetime=100 " Keeps gitgutter speedy
+set mouse=a
+
+" Syntax
+syntax on
+filetype plugin on
 set redrawtime=10000
 
 " Tab setting
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
 set tabstop=2
 set expandtab
 set autoindent
@@ -94,10 +95,10 @@ vnoremap <C-c> "+y
 
 " Buffer management
 nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
-nnoremap <Leader>d :bd<CR> " Delete current buffer
-nnoremap <Leader>D :bd!<CR> " Delete current buffer without saving
-nnoremap <Leader>n :bn<CR> " Next buffer
-nnoremap <Leader>N :bN<CR> " Previous buffer
+nnoremap <Leader>d :bdelete<CR> " Delete current buffer
+nnoremap <Leader>D :bdelete!<CR> " Delete current buffer without saving
+nnoremap <Leader>n :bnext<CR> " Next buffer
+nnoremap <Leader>N :bNext<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
 nnoremap <Leader><Tab> :b#<CR> " Tab between buffers
 
@@ -110,8 +111,9 @@ nnoremap <C-H> <C-W><C-H>
 " Newline Generation
 noremap <CR> o<Esc>
 
-" .vimrc editing
+" .vimrc editing and sourcing
 noremap <leader>vimrc :edit ~/.vimrc<CR>
+noremap <Leader>vs :source $MYVIMRC<CR>
 
 "Plugin Settings
 
@@ -133,8 +135,9 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
 "" ALE
+let ale_completion_enabled = 0
 let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'vue': ['eslint'], '*':['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_linters = {}
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
@@ -144,8 +147,7 @@ highlight SignColumn term=bold cterm=NONE ctermbg=NONE gui=NONE guibg=NONE
 highlight ALEErrorSign ctermfg=Red guifg=Red
 highlight ALEWarningSign ctermfg=Red guifg=Red
 let g:airline#extensions#ale#enabled = 1
-autocmd BufWritePost *.js ALEFix
-autocmd BufWritePost *.rb ALEFix
+
 
 " Auto Pairs
 let g:AutoPairsFlyMode = 0
@@ -155,10 +157,12 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+call deoplete#custom#option('max_list', 15)
+call deoplete#custom#source('ale', 'rank', 999)
 call deoplete#custom#var('tabnine', {
-  \ 'line_limit': 500,
-  \ 'max_num_results': 5
-  \ })
+    \ 'line_limit': 1000,
+    \ 'max_num_results': 5
+    \ })
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'

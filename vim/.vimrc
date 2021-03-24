@@ -25,11 +25,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 
 " IDE
-Plug 'dense-analysis/ale'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Editing
 Plug 'jiangmiao/auto-pairs'
@@ -144,35 +140,9 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
-"" ALE
-let ale_completion_enabled = 0
-let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'vue': ['eslint'], '*':['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '-'
-highlight SignColumn term=bold cterm=NONE ctermbg=NONE gui=NONE guibg=NONE
-highlight ALEErrorSign ctermfg=Red guifg=Red
-highlight ALEWarningSign ctermfg=Red guifg=Red
-let g:airline#extensions#ale#enabled = 1
-
-
 " Auto Pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-call deoplete#custom#option('max_list', 15)
-call deoplete#custom#source('ale', 'rank', 999)
-call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 1000,
-    \ 'max_num_results': 5
-    \ })
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'

@@ -1,0 +1,21 @@
+# Managing dotfiles
+alias config='/usr/bin/git --git-dir=/Users/ttsuzuki/.cfg/ --work-tree=/Users/ttsuzuki'
+
+#zsh config
+alias zshconfig='nvim ~/.zshrc'
+
+#nvim shortcut
+alias v='nvim'
+
+#Overwrite
+alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; rm -f $HOME/rangerdir; cd "$LASTDIR"'
+
+# hosts
+alias hosts='sudo nvim /etc/hosts'
+
+#restore tmux sessions after restart
+alias mux='pgrep -vx tmux > /dev/null && \
+          tmux new -d -s delete-me && \
+          tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
+          tmux kill-session -t delete-me && \
+          tmux attach || tmux attach'

@@ -29,7 +29,6 @@ Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Editing
 Plug 'jiangmiao/auto-pairs'

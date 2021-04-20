@@ -52,11 +52,11 @@ set laststatus=2
 set nowrap
 set ignorecase smartcase
 set number
-set nobackup
-set noswapfile
-set noerrorbells
 set spelllang=en_us
-set hidden " Puts buffer in the background without writing
+set hidden
+set noswapfile
+set nobackup
+set visualbell
 set lazyredraw " Don't update display during macros
 set ttyfast " Send more characters at once
 set history=999
@@ -144,19 +144,25 @@ let g:ctrlp_max_files=0
 let g:ctrlp_max_height = 10
 
 "" ALE
-let ale_completion_enabled = 0
-let g:ale_fixers = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'vue': ['eslint'], '*':['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+let ale_completion_enabled = 1
+let g:ale_fixers = {
+            \ 'javascript': ['eslint'],
+            \ 'typescript': ['eslint'],
+            \ 'ruby': ['rubocop'],
+            \ 'vue': ['eslint'],
+            \ '*':['remove_trailing_lines', 'trim_whitespace']
+            \ }
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript', 'typescript', 'html', 'css']}
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
+" let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '-'
 highlight SignColumn term=bold cterm=NONE ctermbg=NONE gui=NONE guibg=NONE
 highlight ALEErrorSign ctermfg=Red guifg=Red
 highlight ALEWarningSign ctermfg=Red guifg=Red
+nmap gd :ALEGoToDefinition<CR>
 let g:airline#extensions#ale#enabled = 1
-
 
 " Auto Pairs
 let g:AutoPairsFlyMode = 0

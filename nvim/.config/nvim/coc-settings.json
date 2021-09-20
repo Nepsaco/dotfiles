@@ -8,7 +8,9 @@
         "json",
         "javascriptreact",
         "typescript.tsx",
-        "vue"
+        "vue",
+        "scss",
+        "css"
     ],
     "diagnostic.errorSign": "•",
     "diagnostic.warningSign": "•",

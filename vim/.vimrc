@@ -214,7 +214,7 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
 " Fugitive
 nnoremap <Leader>ga :Git add %:p<CR><CR>
-nnoremap <Leader>gs :Gstatus<CR> " Views status, use `-` and `p` to add/remove files
+nnoremap <Leader>gs :G<CR>
 " nnoremap <Leader>gd :Gvdiffsplit!<CR>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>

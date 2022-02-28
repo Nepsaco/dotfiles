@@ -10,7 +10,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 [pull]
-	rebase = false
+	rebase = true
 [init]
 	defaultBranch = master
 [fetch]

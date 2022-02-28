@@ -1,5 +1,0 @@
-pane	0	1	1	:*	1	:/Users/ttsuzuki/dotfiles-knowlege	1	zsh	:nvim .
-pane	1	1	1	:*	1	:/Users/ttsuzuki/vnl/PlatformDevEnv	1	zsh	:-zsh
-window	0	1	:zsh	1	:*	c3dd,254x74,0,0,0	:
-window	1	1	:tmux	1	:*	c3de,254x74,0,0,1	:
-state	1	

@@ -139,7 +139,6 @@ let g:coc_global_extensions = [
             \'coc-git',
             \'coc-explorer',
             \'coc-tabnine',
-            \'coc-phpls',
             \]
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -219,8 +218,10 @@ nnoremap <Leader>gs :G<CR>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
 nnoremap <Leader>gc :Git commit -v -q<CR>
-nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gp :!git push -u origin HEAD<CR>
 nnoremap <Leader>gm :Git merge<CR>
+nnoremap <Leader>df :diffget //2<CR>
+nnoremap <Leader>dj :diffget //3<CR>
 
 " Airline
 let g:airline_theme='molokai'

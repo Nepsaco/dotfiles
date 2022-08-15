@@ -16,5 +16,7 @@
     "diagnostic.warningSign": "•",
     "diagnostic.infoSign": "•",
     "eslint.format.enable": true,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "eslint.workingDirectories": ["./PARTNERVueCLI"],
+    "coc.preferences.extensionUpdateCheck": "daily"
 }

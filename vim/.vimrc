@@ -60,7 +60,6 @@ inoremap jj <ESC>
 vnoremap <C-c> "+y
 
 " Buffer management
-nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 nnoremap <Leader>d :bdelete<CR> " Delete current buffer
 nnoremap <Leader>D :bdelete!<CR> " Delete current buffer without saving
 nnoremap <Leader>n :bnext<CR> " Next buffer
@@ -103,11 +102,15 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Navigation
 Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 Plug 'mileszs/ack.vim'
 
 " IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'yaegassy/coc-intelephense', {'do': 'yarn install --frozen-lockfile'}
+
 
 " Editing
 Plug 'jiangmiao/auto-pairs'
@@ -139,7 +142,6 @@ let g:coc_global_extensions = [
             \'coc-git',
             \'coc-explorer',
             \'coc-tabnine',
-            \'coc-phpls',
             \]
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -186,7 +188,18 @@ let g:solarized_contrast = "high"
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 highlight SignColumn term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
+" " Telescope
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" lua <<EOF 
+" require("telescope").setup{  defaults = { file_ignore_patterns = { "node_modules" }} } 
+" EOF
+
 " Ctrlp
+nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
 let g:ctrlp_use_caching=1
 let g:ctrlp_custom_ignore = 'bin$\|build$\|node_modules$\|tmp$\|dist$\|.git|.bak|.swp|.pyc|.class'
 let g:ctrlp_working_path_mode = 0
@@ -219,8 +232,10 @@ nnoremap <Leader>gs :G<CR>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
 nnoremap <Leader>gc :Git commit -v -q<CR>
-nnoremap <Leader>gp :Git push<CR>
+nnoremap <Leader>gp :!git push -u origin HEAD<CR>
 nnoremap <Leader>gm :Git merge<CR>
+nnoremap <Leader>df :diffget //2<CR>
+nnoremap <Leader>dj :diffget //3<CR>
 
 " Airline
 let g:airline_theme='molokai'

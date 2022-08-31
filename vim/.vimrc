@@ -43,9 +43,6 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 filetype indent on
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
-inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-n>"
-inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-p>"
 
 " Search Highlighting
 augroup vimrc-incsearch-highlight
@@ -177,6 +174,10 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
 
 " Colors
 colorscheme solarized

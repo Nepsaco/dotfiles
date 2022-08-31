@@ -43,9 +43,9 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 filetype indent on
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-n>"
+inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-p>"
 
 " Search Highlighting
 augroup vimrc-incsearch-highlight

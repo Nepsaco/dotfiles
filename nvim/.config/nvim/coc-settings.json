@@ -10,13 +10,16 @@
         "typescript.tsx",
         "vue",
         "scss",
-        "css"
+        "css",
+        "py", 
+        "yaml"
     ],
     "diagnostic.errorSign": "•",
     "diagnostic.warningSign": "•",
     "diagnostic.infoSign": "•",
     "eslint.format.enable": true,
     "eslint.autoFixOnSave": true,
-    "eslint.workingDirectories": ["./PARTNERVueCLI"],
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black"
 }

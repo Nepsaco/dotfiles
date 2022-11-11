@@ -18,3 +18,7 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[alias]
+	hide = update-index --skip-worktree
+	unhide = update-index --no-skip-worktree
+	hidden = ! git ls-files -v | grep '^[h,S]' 

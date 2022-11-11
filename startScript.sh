@@ -62,14 +62,6 @@ else
     echo "Fonts Already Installed"
 fi
 
-if [ ! "$(command -v nvm)" ]
-then
-    echo "Installing NVM"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-else
-    echo "NVM Already Installed"
-fi
-
 set -e
 
 for i in .bashrc .zshrc .vimrc .tmux.conf
@@ -80,5 +72,13 @@ done
 
 echo "Stow symlinks"
 stow -vSt ~ */
+
+if [ ! "$(command -v nvm)" ]
+then
+    echo "Installing NVM"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+else
+    echo "NVM Already Installed"
+fi
 
 echo "Installation Complete"

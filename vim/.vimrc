@@ -19,6 +19,7 @@ set autoread
 set title
 set scrolloff=5
 set sidescrolloff=7
+set relativenumber
 
 "Auto complete command
 set wildmenu
@@ -55,6 +56,7 @@ augroup END
 let mapleader=" "
 inoremap jj <ESC>
 vnoremap <C-c> "+y
+nnoremap <Leader>p :Ex<Cr>
 
 " Buffer management
 nnoremap <Leader>d :bdelete<CR> " Delete current buffer
@@ -93,6 +95,7 @@ endif
 " Style
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -105,9 +108,10 @@ Plug 'mileszs/ack.vim'
 
 " IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'yaegassy/coc-intelephense', {'do': 'yarn install --frozen-lockfile'}
-
+Plug 'vim-test/vim-test'
+Plug 'preservim/vimux'
 
 " Editing
 Plug 'jiangmiao/auto-pairs'
@@ -120,7 +124,7 @@ Plug 'thinca/vim-qfreplace'
 " General
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'kshenoy/vim-signature'
 
@@ -165,6 +169,9 @@ endfunction
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -180,15 +187,36 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
 inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
 
+
+" Vim Test
+let test#strategy = 'vimux'
+let g:test#echo_command = 0
+nnoremap <silent> <leader>tc :TestNearest<CR>
+nnoremap <silent> <leader>tf :TestFile<CR>
+nnoremap <silent> <leader>ta :TestSuite<CR>
+nnoremap <silent> <leader>tl :TestLast<CR>
+nnoremap <silent> <leader>tg :TestVisit<CR>
+nnoremap <silent> <leader>tcw :TestNearest --watch<CR>
+nnoremap <silent> <leader>tfw :TestFile --watch<CR>
+nnoremap <silent> <leader>taw :TestSuite --watch<CR>
+nnoremap <silent> <leader>tlw :TestLast --watch<CR>
+nnoremap <silent> <leader>tgw :TestVisit --watch<CR>
+
 " Colors
-colorscheme solarized
-set background=dark
-let g:solarized_termcolors = &t_Co
-let g:solarized_termtrans = 1
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-highlight SignColumn term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+" colorscheme solarized
+" set background=dark
+" let g:solarized_termcolors = &t_Co
+" let g:solarized_termtrans = 1
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
+" highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+" highlight SignColumn term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
 
 " " Telescope
 " nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -201,7 +229,7 @@ highlight SignColumn term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE
 " EOF
 
 " Ctrlp
-nnoremap <Leader>ff :CtrlP<CR> " Find a file in the current folder recursively
+nnoremap <Leader>pp :CtrlP<CR> " Find a file in the current folder recursively
 let g:ctrlp_use_caching=1
 let g:ctrlp_custom_ignore = 'bin$\|build$\|node_modules$\|tmp$\|dist$\|.git|.bak|.swp|.pyc|.class'
 let g:ctrlp_working_path_mode = 0
@@ -240,7 +268,7 @@ nnoremap <Leader>df :diffget //2<CR>
 nnoremap <Leader>dj :diffget //3<CR>
 
 " Airline
-let g:airline_theme='molokai'
+let g:airline_theme='tokyonight'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#coc#enabled = 1

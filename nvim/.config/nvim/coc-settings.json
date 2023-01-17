@@ -11,8 +11,7 @@
         "vue",
         "scss",
         "css",
-        "py", 
-        "yaml"
+        "python", 
     ],
     "diagnostic.errorSign": "•",
     "diagnostic.warningSign": "•",
@@ -21,5 +20,7 @@
     "eslint.autoFixOnSave": true,
     "coc.preferences.extensionUpdateCheck": "daily",
     "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "pyright.inlayHints.functionReturnTypes": false,
+    "pyright.inlayHints.variableTypes": false
 }

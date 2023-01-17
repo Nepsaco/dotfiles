@@ -10,12 +10,12 @@ require("telescope").setup({
 		file_sorter = require("telescope.sorters").get_fzy_sorter,
 		prompt_prefix = " >",
 		color_devicons = true,
+		path_display = {"truncate"},
 
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-        file_ignore_patterns = {"node_modules"}
 		mappings = {
 			i = {
 				["<C-x>"] = false,
@@ -34,14 +34,10 @@ require("telescope").setup({
     ]]
 })
 
-require("telescope").load_extension("git_worktree")
--- require("telescope").load_extension("fzy_native")
 
 local M = {}
 
 function M.reload_modules()
-	-- Because TJ gave it to me.  Makes me happpy.  Put it next to his other
-	-- awesome things.
 	local lua_dirs = vim.fn.glob("./lua/*", 0, 1)
 	for _, dir in ipairs(lua_dirs) do
 		dir = string.gsub(dir, "./lua/", "")

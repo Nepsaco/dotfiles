@@ -56,11 +56,11 @@ augroup END
 let mapleader=" "
 inoremap jj <ESC>
 vnoremap <C-c> "+y
-nnoremap <Leader>p :Ex<Cr>
+nnoremap <Leader>pv :Ex<Cr>
 
 " Buffer management
 nnoremap <Leader>d :bdelete<CR> " Delete current buffer
-nnoremap <Leader>D :bdelete!<CR> " Delete current buffer without saving
+nnoremap <Leader>D :bw!<CR> " Wipe current buffer without saving
 nnoremap <Leader>n :bnext<CR> " Next buffer
 nnoremap <Leader>N :bNext<CR> " Previous buffer
 nnoremap <Leader>t :enew<CR> " Make a new empty buffer
@@ -102,8 +102,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Navigation
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
 Plug 'mileszs/ack.vim'
 
 " IDE
@@ -170,7 +168,7 @@ endfunction
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qf <Plug>(coc-fix-current)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -184,8 +182,8 @@ endif
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
-inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-p>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 
 " Vim Test
@@ -215,18 +213,7 @@ set termguicolors
 
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-
 colorscheme tokyonight
-
-" " Telescope
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" lua <<EOF 
-" require("telescope").setup{  defaults = { file_ignore_patterns = { "node_modules" }} } 
-" EOF
 
 " Ctrlp
 nnoremap <Leader>pp :CtrlP<CR> " Find a file in the current folder recursively
@@ -242,6 +229,7 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " vim.ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
+nnoremap <leader>pg :Ack 
 
 " Find and replace
 function! VisualFindAndReplace()
@@ -258,14 +246,11 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 " Fugitive
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gs :G<CR>
-" nnoremap <Leader>gd :Gvdiffsplit!<CR>
 nnoremap <Leader>gb :Git branch<Space>
 nnoremap <Leader>go :Git checkout<Space>
 nnoremap <Leader>gc :Git commit -v -q<CR>
 nnoremap <Leader>gp :!git push -u origin HEAD<CR>
 nnoremap <Leader>gm :Git merge<CR>
-nnoremap <Leader>df :diffget //2<CR>
-nnoremap <Leader>dj :diffget //3<CR>
 
 " Airline
 let g:airline_theme='tokyonight'

@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/ttsuzuki/.oh-my-zsh"
-ZSH_THEME="tobie-agnoster"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -72,15 +72,16 @@ rot () {
 # Make sure default region in AWS Set - We only use one region
 export AWS_DEFAULT_REGION="us-west-2"
 
-alias awsloginall='aws sso login --profile=guild-dev && aws sso login --profile=guild-staging && aws sso login --profile=guild-prod'
-alias xdev='eval $(aws2-wrap --profile guild-dev --export) && export STAGE=dev'
-alias xstaging='eval $(aws2-wrap --profile guild-staging --export) && export STAGE=staging'
-alias xprod='eval $(aws2-wrap --profile guild-prod --export) && export STAGE=prod'
-
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-
 # rosetta terminal setup
 if [ $(arch) = "i386" ]; then
     alias ibrew="/usr/local/bin/brew"
     alias ipyenv="arch -x86_64 pyenv"
 fi
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

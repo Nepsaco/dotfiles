@@ -14,17 +14,13 @@ return require('packer').startup(function(use)
     use("romgrk/nvim-treesitter-context")
     use("nvim-treesitter/playground")
 
-    -- Colorschemes
-    use 'folke/tokyonight.nvim'
-
-
     -- Style
+    use 'folke/tokyonight.nvim'
     use 'airblade/vim-gitgutter'
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
 
-    use 'mileszs/ack.vim'
-
+    -- IDE
     use 'vim-test/vim-test'
     use 'preservim/vimux'
 

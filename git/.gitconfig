@@ -21,4 +21,5 @@
 [alias]
 	hide = update-index --skip-worktree
 	unhide = update-index --no-skip-worktree
-	hidden = ! git ls-files -v | grep '^[h,S]' 
+	hidden = !git ls-files -v | grep '^[h,S]' 
+	unhide-all = !git ls-files -v | awk '/S / {print $2}' | xargs git update-index --no-skip-worktree

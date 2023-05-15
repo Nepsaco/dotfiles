@@ -1,3 +1,6 @@
 [submodule "fonts/nerd-fonts"]
 	path = fonts/nerd-fonts
 	url = https://github.com/ryanoasis/nerd-fonts
+[submodule "colors/catppuccin"]
+	path = colors/catppuccin
+	url = https://github.com/catppuccin/catppuccin

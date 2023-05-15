@@ -7,9 +7,6 @@ alias v='nvim'
 #Overwrite
 alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; rm -f $HOME/rangerdir; cd "$LASTDIR"'
 
-# hosts
-alias hosts='sudo nvim /etc/hosts'
-
 #restore tmux sessions after restart
 alias mux='pgrep -vx tmux > /dev/null && \
           tmux new -d -s delete-me && \
@@ -17,9 +14,7 @@ alias mux='pgrep -vx tmux > /dev/null && \
           tmux kill-session -t delete-me && \
           tmux attach || tmux attach'
 
-alias vnl=$HOME/vnl/partner/vnl
 
-alias awsloginall='aws sso login --profile=guild-dev && aws sso login --profile=guild-staging && aws sso login --profile=guild-prod'
 alias xdev='eval $(aws2-wrap --profile guild-dev --export) && export STAGE=dev'
 alias xstaging='eval $(aws2-wrap --profile guild-staging --export) && export STAGE=staging'
 alias xprod='eval $(aws2-wrap --profile guild-prod --export) && export STAGE=prod'

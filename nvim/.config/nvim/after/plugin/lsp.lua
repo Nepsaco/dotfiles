@@ -56,6 +56,17 @@ lsp.configure("eslint", {
     format = true,
 })
 
+lsp.configure("pylsp", {
+   settings = {
+       pylsp = {
+           plugins = {
+                 pycodestyle = { maxLineLength = 200, },
+            }
+        }
+    }
+
+})
+
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 

@@ -24,4 +24,5 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 
+vim.g.loaded_python3_provider = 0
 vim.g.mapleader = " "

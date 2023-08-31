@@ -1,11 +1,16 @@
-require('telescope').setup {
-    defaults = {
-        path_display = { "smart" },
-    },
-}
+require("telescope").setup({
+	defaults = {
+		path_display = { "smart" },
+	},
+	pickers = {
+		find_files = {
+			hidden = true,
+		},
+	},
+})
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>pp', builtin.find_files, {})
-vim.keymap.set('n', '<leader>pfg', builtin.git_files, {})
-vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>pp", builtin.find_files, {})
+vim.keymap.set("n", "<leader>pfg", builtin.git_files, {})
+vim.keymap.set("n", "<leader>pg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>vh", builtin.help_tags, {})

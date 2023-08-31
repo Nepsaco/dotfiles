@@ -23,3 +23,9 @@
 	unhide = update-index --no-skip-worktree
 	hidden = !git ls-files -v | grep '^[h,S]' 
 	unhide-all = !git ls-files -v | awk '/S / {print $2}' | xargs git update-index --no-skip-worktree
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff

@@ -29,3 +29,7 @@
 	prompt = false
 [merge]
 	tool = vimdiff
+[mergetool "vimdiff"]
+	path = nvim
+[push]
+	autoSetupRemote = true

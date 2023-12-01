@@ -33,14 +33,14 @@ return require("packer").startup(function(use)
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
-			{ "tzachar/cmp-tabnine", run = "./install.sh" },
+			-- { "tzachar/cmp-tabnine", run = "./install.sh" },
 
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
 		},
 	})
-	use({ "jose-elias-alvarez/null-ls.nvim" })
+	use({ "nvimtools/none-ls.nvim" })
 	use({
 		"folke/trouble.nvim",
 		requires = "nvim-tree/nvim-web-devicons",
@@ -58,8 +58,16 @@ return require("packer").startup(function(use)
 	use("mbbill/undotree")
 	use("itchyny/vim-qfedit")
 
-	-- General
+	-- Git
 	use("tpope/vim-fugitive")
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
+
+	-- General
 	use("tpope/vim-repeat")
 	use("tpope/vim-unimpaired")
 	use("editorconfig/editorconfig-vim")
@@ -67,9 +75,12 @@ return require("packer").startup(function(use)
 	-- Style
 	use("folke/tokyonight.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin" })
-	use("airblade/vim-gitgutter")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
+
+	-- use("zbirenbaum/copilot.lua")
+	--
+	use({ "github/copilot.vim", branch = "release" })
 end)

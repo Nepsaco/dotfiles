@@ -86,3 +86,6 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+export SNOWFLAKE_USER=tobie.tsuzuki@guildeducation.com 
+export SNOWFLAKE_ACCOUNT=aa40032

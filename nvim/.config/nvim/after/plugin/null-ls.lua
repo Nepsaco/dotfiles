@@ -3,12 +3,15 @@ local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-    sources = {
-        formatting.stylua,
-        formatting.black,
-        formatting.prettier,
-        formatting.eslint,
-        diagnostics.eslint,
-        formatting.markdownlint
-    },
+	on_attach = function()
+		vim.lsp.buf.format()
+	end,
+	sources = {
+		formatting.stylua,
+		formatting.black,
+		formatting.prettierd,
+		formatting.eslint,
+		diagnostics.eslint,
+		formatting.markdownlint,
+	},
 })

@@ -23,7 +23,6 @@ lsp.setup_nvim_cmp({
 		{ name = "path" },
 		{ name = "nvim_lsp" },
 		{ name = "buffer", keyword_length = 3 },
-		-- { name = "cmp_tabnine" },
 		{ name = "luasnip", keyword_length = 2 },
 	},
 })
@@ -98,27 +97,10 @@ lsp.configure("pyright", {
 	},
 })
 
-lsp.configure("css", {
-	root_dir = function(fname)
-		local root_files = {
-			"pyproject.toml",
-			"setup.py",
-			"setup.cfg",
-			"requirements.txt",
-			"Pipfile",
-			"pyrightconfig.json",
-		}
-		return util.find_git_ancestor(fname) or util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
-	end,
-	settings = {
-		python = {
-			analysis = {
-				autoSearchPaths = true,
-				diagnosticMode = "workspace",
-				useLibraryCodeForTypes = true,
-			},
-		},
-	},
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+lsp.configure("cssls", {
+	capabilities = capabilities,
 })
 
 lsp.format_on_save({
@@ -127,7 +109,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
-		["null-ls"] = { "javascript", "typescript", "lua", "typescriptreact", "typescript.tsx", "scss" },
+		["null-ls"] = { "javascript", "typescript", "lua", "typescriptreact", "typescript.tsx", "scss", "mdx", "md" },
 	},
 })
 

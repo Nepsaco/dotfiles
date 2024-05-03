@@ -10,8 +10,7 @@ null_ls.setup({
 		formatting.stylua,
 		formatting.black,
 		formatting.prettierd,
-		formatting.eslint,
-		diagnostics.eslint,
 		formatting.markdownlint,
+		diagnostics.stylelint,
 	},
 })

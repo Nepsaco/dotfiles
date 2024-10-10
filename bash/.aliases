@@ -18,3 +18,8 @@ alias mux='pgrep -vx tmux > /dev/null && \
 alias xdev='eval $(aws2-wrap --profile guild-dev --export) && export STAGE=dev'
 alias xstaging='eval $(aws2-wrap --profile guild-staging --export) && export STAGE=staging'
 alias xprod='eval $(aws2-wrap --profile guild-prod --export) && export STAGE=prod'
+
+function gcop() {
+  git checkout $1
+  ggpull
+}

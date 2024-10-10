@@ -11,6 +11,8 @@ null_ls.setup({
 		formatting.black,
 		formatting.prettierd,
 		formatting.markdownlint,
+		formatting.rubocop,
+		diagnostics.rubocop,
 		diagnostics.stylelint,
 	},
 })

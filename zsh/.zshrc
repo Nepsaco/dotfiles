@@ -56,22 +56,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Importing GUILD NPM Token
 source ~/.secrets
 
-# AWS Credential Rotation
-rot () {
-        STAGE=$@
-        if [ -z "$@" ]; then
-                STAGE=dev
-        fi
-        if [ "$STAGE" = "all" ]; then
-                rot dev && rot staging && rot prod
-        else
-                aws sso login --profile guild-$STAGE &> /dev/null
-        fi
-}
-
-# Make sure default region in AWS Set - We only use one region
-export AWS_DEFAULT_REGION="us-west-2"
-
 # rosetta terminal setup
 if [ $(arch) = "i386" ]; then
     alias ibrew="/usr/local/bin/brew"
@@ -87,5 +71,7 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-export SNOWFLAKE_USER=tobie.tsuzuki@guildeducation.com 
-export SNOWFLAKE_ACCOUNT=aa40032
+[[ -s "/Users/ttsuzuki/.gvm/scripts/gvm" ]] && source "/Users/ttsuzuki/.gvm/scripts/gvm"
+
+# rbenv
+eval "$(rbenv init - --no-rehash zsh)"

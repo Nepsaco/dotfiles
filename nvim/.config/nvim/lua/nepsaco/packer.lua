@@ -54,6 +54,7 @@ return require("packer").startup(function(use)
 	})
 	use("tpope/vim-surround")
 	use("tpope/vim-commentary")
+	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("junegunn/vim-peekaboo")
 	use("mbbill/undotree")
 	use("itchyny/vim-qfedit")
@@ -80,7 +81,5 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
-	-- use("zbirenbaum/copilot.lua")
-	--
-	use({ "github/copilot.vim", branch = "release" })
+	-- use({ "github/copilot.vim", branch = "release" })
 end)

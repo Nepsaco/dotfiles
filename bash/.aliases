@@ -27,4 +27,4 @@ function gcop() {
 alias seed='bin/rails db:seed:apartmentiq && RAILS_ENV=test bin//rails db:seed:apartmentiq'
 
 
-alias rails='bin/rails'
+alias prod='aws ecs execute-command --cluster rentable_rails_production --task $(aws ecs list-tasks --cluster rentable_rails_production --service "rentable_rails_sidekiq_apartmentiq_production" --desired-status RUNNING --query "taskArns[0]" --output text) --interactive --command "su deployuser"'

@@ -15,6 +15,7 @@ return { -- Highlight, edit, and navigate code
 			"markdown_inline",
 			"query",
 			"tsx",
+			"ruby",
 			"vim",
 			"vimdoc",
 		},

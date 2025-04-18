@@ -93,19 +93,95 @@ return { -- Main LSP Configuration
 					},
 				},
 			},
-			ruby_lsp = {},
+			rubocop = {
+				filetypes = { "ruby" },
+				init_options = {
+					formatting = true,
+				},
+				settings = {
+					rubocop = {
+						lint = false,
+						autocorrect = true,
+						safeAutocorrect = true,
+					},
+				},
+			},
 			stylelint_lsp = {},
 			tailwindcss = {},
 			vtsls = {},
+			ruby_lsp = {
+				cmd = { vim.fn.stdpath("data") .. "/mason/bin/ruby-lsp" },
+				settings = {
+					RubyLsp = {
+						formatter = "rubocop",
+						diagnostics = {
+							enable = true,
+							disable = {},
+						},
+						completion = {
+							enable = true,
+						},
+						hover = {
+							enable = true,
+						},
+						documentSymbol = {
+							enable = true,
+						},
+						definition = {
+							enable = true,
+						},
+						references = {
+							enable = true,
+						},
+						experimentalFeatures = {
+							hover = true,
+							documentSymbols = true,
+							documentHighlights = true,
+							documentLink = true,
+							formatting = true,
+							codeActions = true,
+							definition = true,
+							references = true,
+							folding = true,
+						},
+						initializationOptions = {
+							formatter = {
+								useBundler = false,
+							},
+							diagnostics = {
+								useBundler = false,
+							},
+						},
+					},
+				},
+				root_dir = function(fname)
+					return require("lspconfig").util.root_pattern(".git")(fname)
+				end,
+				on_new_config = function(new_config, new_root_dir)
+					new_config.cmd = { vim.fn.stdpath("data") .. "/mason/bin/ruby-lsp" }
+					new_config.cmd_env = {
+						GEM_HOME = vim.fn.stdpath("data") .. "/mason/packages/ruby-lsp/gems",
+						GEM_PATH = vim.fn.stdpath("data") .. "/mason/packages/ruby-lsp/gems",
+						PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH,
+					}
+				end,
+			},
 		}
 
 		require("mason").setup()
 		local ensure_installed = vim.tbl_keys(servers or {})
-		vim.list_extend(ensure_installed, {})
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+		vim.list_extend(ensure_installed, {
+			"vtsls",
+			"cssls",
+			"tailwindcss",
+			"ruby_lsp",
+		})
+		require("mason-tool-installer").setup({
+			ensure_installed = ensure_installed,
+			run_on_start = true,
+		})
 		require("mason-nvim-lint").setup()
 		require("mason-conform").setup({ ensure_installed = ensure_installed })
-
 		require("mason-lspconfig").setup({
 			ensure_installed = ensure_installed,
 			automatic_installation = true,
